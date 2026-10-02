@@ -8,8 +8,6 @@ import { InnovationShowcase } from './components/InnovationShowcase';
 import { Winners } from './components/Winners';
 import { OrganizingTeam } from './components/OrganizingTeam';
 import { Gallery } from './components/Gallery';
-import { FAQ } from './components/FAQ';
-import { ClosingStatement } from './components/ClosingStatement';
 import { Footer } from './components/Footer';
 
 export function App() {
@@ -48,11 +46,6 @@ export function App() {
         {/* 09 — GALLERY & HIGHLIGHTS */}
         <Gallery />
 
-        {/* 10 — FAQ */}
-        <FAQ />
-
-        {/* 11 — CLOSING / EVENT STATEMENT */}
-        <ClosingStatement />
       </main>
 
       {/* 12 — FOOTER */}
