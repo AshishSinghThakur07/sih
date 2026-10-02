@@ -2,16 +2,14 @@ import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { EventInfoStrip } from './components/EventInfoStrip';
-import { WhyParticipate } from './components/WhyParticipate';
-import { SIHThemes } from './components/SIHThemes';
-import { ProblemStatements } from './components/ProblemStatements';
-import { HackathonProcess } from './components/HackathonProcess';
-import { Timeline } from './components/Timeline';
-import { Gallery } from './components/Gallery';
+import { HackathonGlance } from './components/HackathonGlance';
+import { EventJourney } from './components/EventJourney';
+import { InnovationShowcase } from './components/InnovationShowcase';
+import { Winners } from './components/Winners';
 import { OrganizingTeam } from './components/OrganizingTeam';
+import { Gallery } from './components/Gallery';
 import { FAQ } from './components/FAQ';
-import { FinalCTA } from './components/FinalCTA';
+import { ClosingStatement } from './components/ClosingStatement';
 import { Footer } from './components/Footer';
 
 export function App() {
@@ -28,41 +26,35 @@ export function App() {
         {/* 02 — HERO */}
         <Hero />
 
-        {/* 03 — EVENT INTRO / ABOUT */}
+        {/* 03 — ABOUT INTERNAL SIH */}
         <About />
 
-        {/* 04 — QUICK EVENT INFO STRIP */}
-        <EventInfoStrip />
+        {/* 04 — HACKATHON AT A GLANCE */}
+        <HackathonGlance />
 
-        {/* 05 — WHY PARTICIPATE */}
-        <WhyParticipate />
+        {/* 05 — EVENT JOURNEY */}
+        <EventJourney />
 
-        {/* 06 — SIH THEMES */}
-        <SIHThemes />
+        {/* 06 — INNOVATION SHOWCASE */}
+        <InnovationShowcase />
 
-        {/* 07 — PROBLEM STATEMENTS */}
-        <ProblemStatements />
+        {/* 07 — WINNERS & RECOGNITION */}
+        <Winners />
 
-        {/* 08 — HACKATHON PROCESS */}
-        <HackathonProcess />
-
-        {/* 09 — TIMELINE */}
-        <Timeline />
-
-        {/* 10 — GALLERY */}
-        <Gallery />
-
-        {/* 11 — ORGANIZING TEAM */}
+        {/* 08 — JUDGES / MENTORS / ORGANIZING TEAM */}
         <OrganizingTeam />
 
-        {/* 12 — FAQ */}
+        {/* 09 — GALLERY & HIGHLIGHTS */}
+        <Gallery />
+
+        {/* 10 — FAQ */}
         <FAQ />
 
-        {/* 13 — FINAL CTA */}
-        <FinalCTA />
+        {/* 11 — CLOSING / EVENT STATEMENT */}
+        <ClosingStatement />
       </main>
 
-      {/* 14 — FOOTER */}
+      {/* 12 — FOOTER */}
       <Footer />
     </div>
   );

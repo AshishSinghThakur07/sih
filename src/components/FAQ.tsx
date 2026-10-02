@@ -10,20 +10,20 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 relative bg-[#080B0D]">
+    <section id="faq" className="py-20 relative bg-[#080B0D] border-t border-white/5">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-xl mx-auto mb-14">
+        <div className="text-center max-w-xl mx-auto mb-12">
           <span className="text-xs font-mono text-[#F58220] uppercase tracking-widest font-semibold block mb-2">
-            QUESTIONS & ANSWERS
+            EVENT INFORMATION
           </span>
-          <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
             FREQUENTLY ASKED QUESTIONS
           </h2>
         </div>
 
-        {/* Accordion Stream */}
+        {/* Accordion List */}
         <div className="space-y-3">
           {EVENT_CONFIG.faq.map(item => {
             const isOpen = openId === item.id;
@@ -31,7 +31,7 @@ export const FAQ: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className="rounded-2xl bg-[#0E1318] border border-white/10 overflow-hidden"
+                className="rounded-2xl bg-[#0E1318] border border-white/10 overflow-hidden transition-colors"
               >
                 <button
                   onClick={() => toggleAccordion(item.id)}
@@ -39,7 +39,7 @@ export const FAQ: React.FC = () => {
                 >
                   <div className="flex items-center gap-3">
                     <HelpCircle className="w-4 h-4 text-[#F58220] shrink-0" />
-                    <span className="text-base font-display font-bold text-white">
+                    <span className="text-sm sm:text-base font-display font-bold text-white">
                       {item.question}
                     </span>
                   </div>

@@ -1,51 +1,59 @@
-import sihLogo from '../assets/logos/sih-logo.svg';
-import collegeLogo from '../assets/logos/rrgi-logo.svg';
+import sihLogo from '../assets/logos/sih-logo-provided.png';
+import collegeLogo from '../assets/logos/rrgi-logo-provided.png';
 import moeLogo from '../assets/logos/moe-logo.svg';
 import aicteLogo from '../assets/logos/aicte-logo.svg';
 import iicLogo from '../assets/logos/iic-logo.svg';
 
-export interface ProblemStatement {
+export interface StatItem {
   id: string;
-  psCode: string;
-  title: string;
-  organization: string;
-  category: 'Software' | 'Hardware';
-  theme: string;
-  complexity: 'Beginner' | 'Intermediate' | 'Advanced';
-  description: string;
-  impact: string;
-  techStack: string[];
+  label: string;
+  value: string;
+  subtext: string;
+  icon: string;
 }
 
-export interface SIHTheme {
-  id: string;
+export interface JourneyStage {
+  step: string;
   title: string;
-  code: string;
-  category: string;
+  subtitle: string;
   description: string;
   icon: string;
-  psCount: number;
-  gradient: string;
 }
 
-export interface TimelineEvent {
+export interface ShowcaseProject {
   id: string;
-  phase: string;
   title: string;
-  date: string;
-  time: string;
+  teamName: string;
+  category: 'Software' | 'Hardware' | 'IoT / Embedded';
+  domain: string;
   description: string;
-  status: 'upcoming' | 'active' | 'completed';
+  techStack: string[];
+  teamMembers?: string[];
+  image: string;
+  isFeatured?: boolean;
+}
+
+export interface WinnerItem {
+  position: '1st' | '2nd' | '3rd' | 'Special';
+  title: string;
+  teamName: string;
+  projectTitle: string;
+  category: string;
+  prize?: string;
+  description: string;
+  members: string[];
+  image?: string;
 }
 
 export interface TeamMember {
   id: string;
   name: string;
   role: string;
-  category: 'SPOC' | 'Faculty Coordinator' | 'Technical Team' | 'Student Organizer';
+  category: 'Leadership' | 'Judge' | 'Faculty' | 'Student';
   designation: string;
   department?: string;
   image: string;
+  bio?: string;
 }
 
 export interface GalleryItem {
@@ -54,28 +62,26 @@ export interface GalleryItem {
   category: string;
   image: string;
   aspect: string;
+  description?: string;
 }
 
 export interface FAQItem {
   id: string;
   question: string;
   answer: string;
-  category: 'General' | 'Registration' | 'Problem Statements' | 'Evaluation';
 }
 
 export const EVENT_CONFIG = {
   collegeName: "RRGI",
-  collegeFullName: "RajaRajeswari Group of Institutions",
+  collegeFullName: "R.R. Group of Institutions",
   collegeTagline: "Center for Innovation, Research & Entrepreneurship",
   eventName: "Smart India Hackathon",
-  eventEdition: "Internal Smart India Hackathon",
+  eventEdition: "Internal Smart India Hackathon 2026",
   year: "2026",
-  tagline: "Build. Solve. Innovate.",
+  subtitle: "Digital Event Showcase & Archive",
   
   eventDate: "[EVENT DATE]",
-  venue: "[VENUE]",
-  registrationDeadline: "[REGISTRATION DEADLINE]",
-  registrationLink: "[REGISTRATION LINK]",
+  venue: "RRGI Campus Auditorium & Innovation Block",
   contactEmail: "[CONTACT EMAIL]",
   phone: "[PHONE NUMBER]",
 
@@ -87,408 +93,350 @@ export const EVENT_CONFIG = {
     iic: iicLogo,
   },
 
-  // Concise Quick Event Info Strip (No fake bloated stats)
-  quickInfo: [
-    { label: "TEAM SIZE", value: "6 Students", note: "Min. 1 female member mandatory as per SIH guidelines" },
-    { label: "PROBLEM STATEMENTS", value: "[XX] Available", note: "Sourced directly from Union Ministries & Industry" },
-    { label: "VENUE", value: "[VENUE]", note: "RRGI Campus Auditorium & Innovation Block" },
-    { label: "EVENT DATE", value: "[EVENT DATE]", note: "36-Hour continuous internal sprint" }
-  ],
-
-  // 5 Concise Why Participate Points
-  whyParticipate: [
+  // Key Event Metrics (Using real structure with clean placeholders)
+  stats: [
     {
-      step: "01",
-      title: "Solve Real Problems",
-      description: "Tackle problem statements submitted directly by Government Ministries, State Depts, and public enterprises.",
-      icon: "ShieldAlert"
-    },
-    {
-      step: "02",
-      title: "Build Real Solutions",
-      description: "Develop working software models and functional hardware prototypes with your multidisciplinary team.",
-      icon: "Cpu"
-    },
-    {
-      step: "03",
-      title: "Work With Your Team",
-      description: "Collaborate closely with peers across engineering and technology departments at RRGI.",
+      id: "stat-1",
+      label: "TOTAL PARTICIPANTS",
+      value: "[XX]",
+      subtext: "Student Innovators Across Departments",
       icon: "Users"
     },
     {
+      id: "stat-2",
+      label: "TEAMS PARTICIPATED",
+      value: "[XX]",
+      subtext: "Multidisciplinary 6-Member Teams",
+      icon: "ShieldCheck"
+    },
+    {
+      id: "stat-3",
+      label: "PROJECTS SHOWCASED",
+      value: "[XX]",
+      subtext: "Software & Hardware Prototypes",
+      icon: "Cpu"
+    },
+    {
+      id: "stat-4",
+      label: "NATIONAL NOMINEES",
+      value: "[XX]",
+      subtext: "Selected for National SIH Portal",
+      icon: "Trophy"
+    }
+  ] as StatItem[],
+
+  // Completed Hackathon Journey
+  journey: [
+    {
+      step: "01",
+      title: "IDEATION & SELECTION",
+      subtitle: "Challenge Mapping",
+      description: "Student teams analyzed national problem statements and formulated innovation blueprints.",
+      icon: "Lightbulb"
+    },
+    {
+      step: "02",
+      title: "TEAM FORMATION",
+      subtitle: "Cross-Disciplinary Unity",
+      description: "Assembled 6-member teams incorporating diverse engineering departments and mandatory female leadership.",
+      icon: "Users"
+    },
+    {
+      step: "03",
+      title: "INTERNAL SCREENING",
+      subtitle: "Proposal Abstract Review",
+      description: "Panel of faculty evaluators screened initial solution architectures for technical feasibility.",
+      icon: "FileSearch"
+    },
+    {
       step: "04",
-      title: "Learn From Mentors",
-      description: "Receive direct guidance, code reviews, and architecture feedback from senior faculty and tech mentors.",
+      title: "MENTORSHIP SPRINT",
+      subtitle: "1-on-1 Guidance",
+      description: "Expert mentors provided live feedback on database design, hardware wiring, and algorithmic efficiency.",
       icon: "Presentation"
     },
     {
       step: "05",
-      title: "Institutional Selection",
-      description: "Top selected teams will receive official nomination to represent RRGI on the national SIH portal.",
+      title: "CONTINUOUS PROTOTYPING",
+      subtitle: "36-Hour Build Phase",
+      description: "Intensive hands-on sprint at the RRGI Innovation Block creating working software and physical models.",
+      icon: "Code"
+    },
+    {
+      step: "06",
+      title: "JURY EVALUATION",
+      subtitle: "Live System Demos",
+      description: "Distinguished judges evaluated functioning prototypes on innovation, impact, and technical execution.",
+      icon: "CheckCircle2"
+    },
+    {
+      step: "07",
+      title: "RECOGNITION & NOMINATION",
+      subtitle: "Valedictory Awards",
+      description: "Top winning teams were recognized and officially nominated to the National SIH 2026 Portal.",
       icon: "Trophy"
     }
-  ],
+  ] as JourneyStage[],
 
-  // Official SIH Themes
-  themes: [
+  // Innovation Showcase Projects
+  projects: [
     {
-      id: "theme-1",
-      title: "Smart Automation & Robotics",
-      code: "SAR",
-      category: "Hardware & Software",
-      description: "Autonomous robotics, industrial IoT, drone logistics, and automated vision systems.",
-      icon: "Bot",
-      psCount: 28,
-      gradient: "from-orange-500/20 to-amber-500/5"
-    },
-    {
-      id: "theme-2",
-      title: "MedTech, Biotech & Healthcare",
-      code: "MBH",
-      category: "Software & Hardware",
-      description: "AI diagnostics, remote healthcare portals, smart monitors, and medical tech.",
-      icon: "Activity",
-      psCount: 34,
-      gradient: "from-emerald-500/20 to-teal-500/5"
-    },
-    {
-      id: "theme-3",
-      title: "Clean & Green Technology",
-      code: "CGT",
-      category: "Sustainability",
-      description: "Waste management AI, carbon footprint tracking, and renewable energy tools.",
-      icon: "Leaf",
-      psCount: 22,
-      gradient: "from-green-500/20 to-emerald-500/5"
-    },
-    {
-      id: "theme-4",
-      title: "Agriculture & Rural Tech",
-      code: "ART",
-      category: "AgriTech",
-      description: "Precision farming tools, crop disease detection, smart irrigation & farmer tech.",
-      icon: "Sprout",
-      psCount: 30,
-      gradient: "from-lime-500/20 to-emerald-500/5"
-    },
-    {
-      id: "theme-5",
-      title: "Blockchain & Cybersecurity",
-      code: "BCS",
-      category: "Security",
-      description: "Zero-trust architectures, tamper-proof credential verification & threat defense.",
-      icon: "Lock",
-      psCount: 19,
-      gradient: "from-blue-500/20 to-indigo-500/5"
-    },
-    {
-      id: "theme-6",
-      title: "Smart Vehicles & Mobility",
-      code: "SVM",
-      category: "Automotive & EV",
-      description: "EV battery telemetry, intelligent traffic monitoring & vehicle safety systems.",
-      icon: "Zap",
-      psCount: 25,
-      gradient: "from-amber-500/20 to-orange-500/5"
-    },
-    {
-      id: "theme-7",
-      title: "Smart Education & EdTech",
-      code: "SEE",
-      category: "Education",
-      description: "Personalized learning assistants, regional language tools & inclusive education.",
-      icon: "GraduationCap",
-      psCount: 31,
-      gradient: "from-cyan-500/20 to-blue-500/5"
-    },
-    {
-      id: "theme-8",
-      title: "Disaster Management & Safety",
-      code: "DMS",
-      category: "Resilience",
-      description: "Early warning warning networks, flood mapping AI, and emergency communication gear.",
-      icon: "ShieldCheck",
-      psCount: 18,
-      gradient: "from-red-500/20 to-orange-500/5"
-    }
-  ] as SIHTheme[],
-
-  // Configurable Problem Statements
-  problemStatements: [
-    {
-      id: "ps-1",
-      psCode: "SIH1620",
-      title: "AI-Powered Real-Time Traffic Congestion & Emergency Dispatch",
-      organization: "Ministry of Road Transport & Highways",
+      id: "proj-1",
+      title: "[AI TRAFFIC CONGESTION & EMERGENCY DISPATCH]",
+      teamName: "Team [ALPHA INNOVATORS]",
       category: "Software",
-      theme: "Smart Vehicles & Mobility",
-      complexity: "Advanced",
-      description: "Computer vision system that analyzes city traffic feeds to dynamically adjust signals and clear green corridors for emergency vehicles.",
-      impact: "Reduces emergency response times in urban zones.",
-      techStack: ["Python", "YOLOv8", "OpenCV", "TensorFlow", "React"]
+      domain: "Smart Vehicles & Mobility",
+      description: "Computer vision and edge AI telemetry system designed to dynamically adjust urban signal timers and clear green corridors for emergency response vehicles.",
+      techStack: ["Python", "YOLOv8", "OpenCV", "TensorFlow", "React"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+      isFeatured: true
     },
     {
-      id: "ps-2",
-      psCode: "SIH1645",
-      title: "Early Plant Disease Identification via Edge AI & Drone Imagery",
-      organization: "Ministry of Agriculture & Farmers Welfare",
+      id: "proj-2",
+      title: "[OFFLINE EDGE-AI PLANT DISEASE DETECTOR]",
+      teamName: "Team [AGRI-TECH LABS]",
       category: "Hardware",
-      theme: "Agriculture & Rural Tech",
-      complexity: "Intermediate",
-      description: "Portable IoT edge device capturing leaf imagery and detecting fungal pathogens offline without requiring active internet connection.",
-      impact: "Prevents crop damage for smallholder farmers.",
-      techStack: ["Raspberry Pi", "TensorFlow Lite", "Embedded C++", "Flutter"]
-    },
-    {
-      id: "ps-3",
-      psCode: "SIH1702",
-      title: "Blockchain Academic Marksheet & Credential Verification Portal",
-      organization: "AICTE / Ministry of Education",
-      category: "Software",
-      theme: "Blockchain & Cybersecurity",
-      complexity: "Advanced",
-      description: "Decentralized credential issuing and verification platform for instant QR-code validation of academic certificates.",
-      impact: "Eliminates fraudulent academic degree certificates.",
-      techStack: ["Solidity", "Polygon", "IPFS", "Node.js", "React"]
-    },
-    {
-      id: "ps-4",
-      psCode: "SIH1755",
-      title: "Autonomous Waste Sorting Robotic Arm with Vision Sensors",
-      organization: "Ministry of Housing & Urban Affairs",
-      category: "Hardware",
-      theme: "Clean & Green Technology",
-      complexity: "Advanced",
-      description: "Robotic manipulator capable of segregating recyclable plastics, metals, and organic waste on conveyor lines.",
-      impact: "Improves municipal recycling efficiency and worker safety.",
-      techStack: ["ROS2", "OpenCV", "PyTorch", "Arduino", "3D Printing"]
-    }
-  ] as ProblemStatement[],
-
-  // Minimal Hackathon Process (Connected visual stepper)
-  process: [
-    { step: "01", name: "Register", desc: "Form a team of 6 RRGI students with min. 1 female member." },
-    { step: "02", name: "Form Team", desc: "Finalize team roles, leader, and multidisciplinary members." },
-    { step: "03", name: "Choose Problem", desc: "Browse official SIH problem statements and pick your challenge." },
-    { step: "04", name: "Develop Solution", desc: "Prepare your solution proposal presentation and technical architecture." },
-    { step: "05", name: "Present", desc: "Demonstrate your working prototype before internal evaluators." },
-    { step: "06", name: "Evaluation", desc: "Jury scores projects on novelty, feasibility, tech stack, and impact." },
-    { step: "07", name: "Selection", desc: "Top selected RRGI teams advance to national SIH portal nomination." }
-  ],
-
-  // Clean Timeline
-  timeline: [
-    {
-      id: "t-1",
-      phase: "Phase 1: Registration",
-      title: "Registration Opens",
-      date: "[REGISTRATION START DATE]",
-      time: "10:00 AM",
-      description: "Internal registration portal opens for all RRGI departments.",
-      status: "completed"
-    },
-    {
-      id: "t-2",
-      phase: "Phase 1: Registration",
-      title: "Idea / PS Submission Deadline",
-      date: "[SUBMISSION DEADLINE]",
-      time: "11:59 PM",
-      description: "Deadline for submitting team details and 1-page solution abstract.",
-      status: "active"
-    },
-    {
-      id: "t-3",
-      phase: "Phase 2: Screening",
-      title: "Internal Shortlisting Announcement",
-      date: "[SCREENING DATE]",
-      time: "05:00 PM",
-      description: "Shortlisted teams announced for the continuous build sprint.",
-      status: "upcoming"
-    },
-    {
-      id: "t-4",
-      phase: "Phase 3: Hackathon Day",
-      title: "Internal Hackathon Kickoff & Sprint",
-      date: "[HACKATHON DATE]",
-      time: "09:00 AM",
-      description: "Build sprint begins on campus with live coding and mentor reviews.",
-      status: "upcoming"
-    },
-    {
-      id: "t-5",
-      phase: "Phase 4: Evaluation",
-      title: "Jury Presentation & Selection",
-      date: "[EVALUATION DATE]",
-      time: "02:00 PM",
-      description: "Live prototype demo before evaluation panel and valedictory announcement.",
-      status: "upcoming"
-    }
-  ] as TimelineEvent[],
-
-  // Rich Editorial Gallery Data
-  gallery: [
-    {
-      id: "g-1",
-      title: "Continuous 36-Hour Hackathon Sprint",
-      category: "Coding & Building",
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
-      aspect: "col-span-1 md:col-span-2 row-span-2",
-      description: "RRGI student teams collaborating overnight in the main innovation block."
-    },
-    {
-      id: "g-2",
-      title: "Hardware Prototype Assembly & Testing",
-      category: "Robotics & IoT",
+      domain: "Agriculture & Rural Tech",
+      description: "Portable IoT edge camera system running lightweight neural networks to detect crop leaf blights offline in remote farmlands.",
+      techStack: ["Raspberry Pi", "TensorFlow Lite", "Embedded C++", "Flutter"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
       image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
-      description: "IoT sensor nodes and robotic arms built for agricultural and municipal challenges."
+      isFeatured: false
     },
     {
-      id: "g-3",
-      title: "Internal Jury Evaluation & Demo Pitch",
-      category: "Judging Round",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
-      description: "Teams presenting system architecture and live working models to evaluators."
+      id: "proj-3",
+      title: "[BLOCKCHAIN MARKSHEET VERIFICATION SYSTEM]",
+      teamName: "Team [CYBER SHIELD]",
+      category: "Software",
+      domain: "Blockchain & Security",
+      description: "Decentralized document verification registry allowing instant QR-based validation of academic credentials to prevent certificate forgery.",
+      techStack: ["Solidity", "Polygon", "IPFS", "Node.js", "React"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+      isFeatured: false
     },
     {
-      id: "g-4",
-      title: "Faculty Mentorship & Architecture Review",
-      category: "Mentorship",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
-      description: "Expert faculty mentors providing 1-on-1 guidance on software stack and database schema."
-    },
-    {
-      id: "g-5",
-      title: "Auditorium Opening Ceremony & Keynote",
-      category: "Event Ceremony",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80",
-      aspect: "col-span-1 md:col-span-2 row-span-1",
-      description: "Principal and SIH SPOC addressing participants during the inauguration ceremony."
-    },
-    {
-      id: "g-6",
-      title: "Valedictory & Institutional Winner Announcement",
-      category: "Awards",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
-      description: "Top selected teams receiving official SIH 2026 nomination certificates."
+      id: "proj-4",
+      title: "[AUTONOMOUS WASTE SEGREGATION ROBOTIC ARM]",
+      teamName: "Team [ROBO MATICS]",
+      category: "Hardware",
+      domain: "Clean & Green Tech",
+      description: "Robotic arm integrated with optical spectral sensors to classify and sort recyclable plastics, metals, and organic municipal waste.",
+      techStack: ["ROS2", "OpenCV", "PyTorch", "Arduino", "3D Modeling"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+      isFeatured: false
     }
-  ],
+  ] as ShowcaseProject[],
 
-  // Structured Organizing Team (Leadership & Students)
-  organizingTeam: {
+  // Winners Podium Data
+  winners: [
+    {
+      position: "1st",
+      title: "FIRST PLACE WINNER",
+      teamName: "Team [TEAM NAME 1]",
+      projectTitle: "[PROJECT TITLE 1]",
+      category: "Software / Hardware",
+      prize: "Official SIH 2026 National Nomination",
+      description: "Awarded 1st place for outstanding technical innovation, working prototype demonstration, and high real-world impact.",
+      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      position: "2nd",
+      title: "SECOND PLACE WINNER",
+      teamName: "Team [TEAM NAME 2]",
+      projectTitle: "[PROJECT TITLE 2]",
+      category: "Software / Hardware",
+      prize: "Official SIH 2026 National Nomination",
+      description: "Recognized for exemplary prototype performance and practical engineering implementation during the sprint.",
+      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      position: "3rd",
+      title: "THIRD PLACE WINNER",
+      teamName: "Team [TEAM NAME 3]",
+      projectTitle: "[PROJECT TITLE 3]",
+      category: "Software / Hardware",
+      prize: "Official SIH 2026 National Nomination",
+      description: "Secured third place with an impressive demonstration of problem-solving rigor and system reliability.",
+      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      position: "Special",
+      title: "BEST HARDWARE INNOVATION",
+      teamName: "Team [TEAM NAME 4]",
+      projectTitle: "[SPECIAL PROJECT TITLE]",
+      category: "Hardware & IoT",
+      prize: "Special Jury Recognition",
+      description: "Awarded special jury recognition for best hardware prototype assembly and physical integration.",
+      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
+      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+    }
+  ] as WinnerItem[],
+
+  // Event Team & Leadership
+  team: {
     leadership: [
       {
-        id: "ot-1",
-        name: "Dr. [SIH SPOC NAME]",
+        id: "t-1",
+        name: "[SPOC NAME]",
         role: "SIH Single Point of Contact (SPOC)",
-        category: "SPOC",
+        category: "Leadership",
         designation: "Professor & Head of Department",
-        department: "Dept. of Computer Science & Engineering",
+        department: "Department of Computer Science & Engineering",
         image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-        bio: "Overseeing institutional SIH 2026 execution, portal nominations, and jury evaluation."
+        bio: "Led overall institutional SIH 2026 execution, jury panel coordination, and portal candidate nominations."
       },
       {
-        id: "ot-2",
-        name: "Prof. [FACULTY CONVENER]",
+        id: "t-2",
+        name: "[FACULTY CONVENER NAME]",
         role: "Faculty Convener & IIC Lead",
-        category: "Faculty Coordinator",
+        category: "Leadership",
         designation: "Associate Professor",
-        department: "Dept. of Information Technology",
+        department: "Department of Information Technology",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-        bio: "Managing mentor allocation, venue logistics, and institutional R&D support."
+        bio: "Managed technical mentoring logistics, venue infrastructure, and internal evaluation standards."
+      }
+    ],
+    judges: [
+      {
+        id: "t-3",
+        name: "[JUDGE NAME 1]",
+        role: "External Technical Judge",
+        category: "Judge",
+        designation: "Industry Principal Architect",
+        department: "Technology Evaluation Jury",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        id: "t-4",
+        name: "[JUDGE NAME 2]",
+        role: "Academic Evaluator",
+        category: "Judge",
+        designation: "Senior Research Fellow",
+        department: "Innovation & R&D Cell",
+        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
       }
     ],
     faculty: [
       {
-        id: "ot-3",
-        name: "Dr. [CO-CONVENER NAME]",
-        role: "Faculty Co-Convener",
-        category: "Faculty Coordinator",
-        designation: "Associate Professor",
-        department: "Dept. of Artificial Intelligence & DS",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
+        id: "t-5",
+        name: "[FACULTY MENTOR 1]",
+        role: "Software Track Mentor",
+        category: "Faculty",
+        designation: "Assistant Professor",
+        department: "Dept. of Computer Science & Engineering",
+        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
       },
       {
-        id: "ot-4",
-        name: "Prof. [TECH EVALUATOR]",
-        role: "Technical Evaluation Lead",
-        category: "Faculty Coordinator",
-        designation: "Assistant Professor",
-        department: "Dept. of Computer Science & Engg",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
+        id: "t-6",
+        name: "[FACULTY MENTOR 2]",
+        role: "Hardware & Robotics Mentor",
+        category: "Faculty",
+        designation: "Associate Professor",
+        department: "Dept. of Electrical & Electronics Engg",
+        image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
       }
     ],
     students: [
       {
-        id: "ot-5",
-        name: "[STUDENT OVERALL LEAD]",
-        role: "Student Overall Coordinator",
-        category: "Student Organizer",
-        designation: "Lead Student Organizer",
-        department: "RRGI Student Developer Community",
+        id: "t-7",
+        name: "[STUDENT COORDINATOR 1]",
+        role: "Overall Student Convener",
+        category: "Student",
+        designation: "Final Year Student Leader",
+        department: "RRGI Student Innovation Club",
         image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80"
       },
       {
-        id: "ot-6",
-        name: "[TECHNICAL LEAD 1]",
-        role: "Technical Lead",
-        category: "Student Organizer",
+        id: "t-8",
+        name: "[STUDENT COORDINATOR 2]",
+        role: "Technical Operations Lead",
+        category: "Student",
         designation: "Pre-Final Year CSE",
-        department: "Portal & Infrastructure Lead",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
-      },
-      {
-        id: "ot-7",
-        name: "[LOGISTICS LEAD]",
-        role: "Logistics Coordinator",
-        category: "Student Organizer",
-        designation: "Pre-Final Year IT",
-        department: "Event Management Team",
+        department: "Event Management & Portal Lead",
         image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80"
       }
     ]
   },
 
-  // 5–7 Concise FAQs
+  // Event Gallery
+  gallery: [
+    {
+      id: "g-1",
+      title: "36-Hour Innovation Build Sprint",
+      category: "Coding & Prototyping",
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
+      aspect: "col-span-1 md:col-span-2 row-span-2",
+      description: "RRGI student teams collaborating during the overnight build phase in the Innovation Block."
+    },
+    {
+      id: "g-2",
+      title: "Hardware & Robotics Assembly",
+      category: "Hardware Track",
+      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+      aspect: "col-span-1 row-span-1",
+      description: "Microcontroller wiring, sensor calibration, and prototype assembly by engineering teams."
+    },
+    {
+      id: "g-3",
+      title: "Jury Demonstration & Prototype Pitch",
+      category: "Evaluation Round",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      aspect: "col-span-1 row-span-1",
+      description: "Teams presenting system architecture and functioning models before external judges."
+    },
+    {
+      id: "g-4",
+      title: "Faculty Mentorship & Guidance",
+      category: "Mentorship",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
+      aspect: "col-span-1 row-span-1",
+      description: "Senior faculty mentors conducting 1-on-1 code reviews and architecture refinements."
+    },
+    {
+      id: "g-5",
+      title: "Inaugural Session & Keynote Address",
+      category: "Event Ceremony",
+      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80",
+      aspect: "col-span-1 md:col-span-2 row-span-1",
+      description: "Opening ceremony at RRGI Auditorium marking the official launch of Internal SIH 2026."
+    },
+    {
+      id: "g-6",
+      title: "Valedictory Awards & National Nomination",
+      category: "Winners Ceremony",
+      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
+      aspect: "col-span-1 row-span-1",
+      description: "Top winning teams receiving official SIH 2026 nomination certificates and honors."
+    }
+  ] as GalleryItem[],
+
+  // Post-Event FAQ (No registration questions!)
   faq: [
     {
       id: "faq-1",
-      category: "General",
-      question: "What is the Internal Smart India Hackathon at RRGI?",
-      answer: "The Internal SIH is RRGI's mandatory campus-level hackathon. It evaluates and shortlists student teams to represent RRGI on the national Smart India Hackathon portal."
+      question: "What was the Internal Smart India Hackathon 2026 at RRGI?",
+      answer: "Internal SIH 2026 was RRGI's official campus hackathon organized under MoE and AICTE guidelines to evaluate, shortlist, and nominate top student innovation teams for the National Smart India Hackathon 2026."
     },
     {
       id: "faq-2",
-      category: "Registration",
-      question: "Who can participate?",
-      answer: "All regular full-time undergraduate and postgraduate students across departments at RRGI are eligible to participate."
+      question: "How were projects evaluated during the event?",
+      answer: "Solutions were evaluated by a panel of judges on four primary criteria: (1) Technical Novelty & Originality, (2) Prototype Functionality, (3) Feasibility & Real-World Impact, and (4) Quality of Pitch & Presentation."
     },
     {
       id: "faq-3",
-      category: "Registration",
-      question: "How many students can form a team?",
-      answer: "Each team must consist of exactly 6 members from RRGI. As per official SIH guidelines, at least 1 female team member is mandatory in every team."
+      question: "What is the next milestone for selected winning teams?",
+      answer: "Top winning teams identified during this internal edition have been officially nominated by RRGI's SIH SPOC on the National SIH Portal to compete in the National Grand Finale."
     },
     {
       id: "faq-4",
-      category: "Problem Statements",
-      question: "How do we select a problem statement?",
-      answer: "Browse the problem statements listed on this portal or the official SIH portal, select your challenge, and prepare your solution presentation using the prescribed SIH PPT template."
-    },
-    {
-      id: "faq-5",
-      category: "Evaluation",
-      question: "How will teams be evaluated?",
-      answer: "Projects are evaluated on: (1) Novelty & Originality (2) Technical Architecture (3) Prototype Functionality (4) Real-World Impact (5) Final Pitch Quality."
-    },
-    {
-      id: "faq-6",
-      category: "General",
-      question: "What happens after the internal hackathon?",
-      answer: "Top selected teams will be officially nominated by RRGI's SIH SPOC on the National SIH Portal for the National Grand Finale."
+      question: "Who organized and coordinated the event at RRGI?",
+      answer: "The event was organized by RRGI's Institution's Innovation Council (IIC) and R&D Cell under the leadership of the SIH SPOC, faculty conveners, and student coordinators."
     }
   ] as FAQItem[]
 };

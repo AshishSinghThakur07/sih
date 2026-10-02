@@ -1,20 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { EVENT_CONFIG } from '../config/eventConfig';
+import { EVENT_CONFIG, type GalleryItem } from '../config/eventConfig';
 import { Maximize2, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
-
-interface GalleryItemType {
-  id: string;
-  title: string;
-  category: string;
-  image: string;
-  aspect: string;
-  description?: string;
-}
 
 export const Gallery: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const items: GalleryItemType[] = EVENT_CONFIG.gallery;
+  const items: GalleryItem[] = EVENT_CONFIG.gallery;
 
   const handleNext = useCallback(() => {
     if (selectedIndex !== null) {
@@ -60,10 +51,10 @@ export const Gallery: React.FC = () => {
             <span>CAMPUS INNOVATION STORY</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight leading-tight">
-            EVENT MOMENTS
+            GALLERY & EVENT HIGHLIGHTS
           </h2>
           <p className="mt-3 text-sm text-zinc-400 font-sans">
-            A visual glimpse into ideas, collaboration, and innovation at {EVENT_CONFIG.collegeName}.
+            A visual chronicle of continuous prototyping, mentor sessions, jury pitches, and awards at {EVENT_CONFIG.collegeName}.
           </p>
         </div>
 
@@ -75,7 +66,6 @@ export const Gallery: React.FC = () => {
               onClick={() => setSelectedIndex(idx)}
               className={`group relative rounded-3xl overflow-hidden border border-white/10 glass-panel cursor-pointer shadow-2xl transition-all duration-500 hover:border-[#F58220]/50 hover:-translate-y-1 ${item.aspect}`}
             >
-              {/* Photo Image */}
               <img
                 src={item.image}
                 alt={item.title}
@@ -83,10 +73,8 @@ export const Gallery: React.FC = () => {
                 loading="lazy"
               />
 
-              {/* Dark Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#080B0D] via-[#080B0D]/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
 
-              {/* Content Overlay */}
               <div className="absolute bottom-0 inset-x-0 p-6 flex items-end justify-between z-10">
                 <div className="pr-4">
                   <span className="px-3 py-1 rounded-full bg-[#F58220]/20 border border-[#F58220]/40 text-[10px] font-mono font-bold text-[#F58220] uppercase tracking-wider mb-2 inline-block">
@@ -102,7 +90,6 @@ export const Gallery: React.FC = () => {
                   )}
                 </div>
 
-                {/* Hover Maximize Icon */}
                 <div className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shrink-0">
                   <Maximize2 className="w-4 h-4" />
                 </div>
@@ -144,7 +131,6 @@ export const Gallery: React.FC = () => {
                   className="max-h-[68vh] w-auto object-contain rounded-xl shadow-2xl"
                 />
 
-                {/* Left Arrow Button */}
                 <button
                   onClick={handlePrev}
                   className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 border border-white/20 text-white hover:bg-[#F58220] transition-colors"
@@ -153,7 +139,6 @@ export const Gallery: React.FC = () => {
                   <ChevronLeft className="w-6 h-6" />
                 </button>
 
-                {/* Right Arrow Button */}
                 <button
                   onClick={handleNext}
                   className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 border border-white/20 text-white hover:bg-[#F58220] transition-colors"
@@ -177,7 +162,7 @@ export const Gallery: React.FC = () => {
                 </div>
 
                 <div className="text-xs font-mono text-[#2E9E45] font-semibold shrink-0">
-                  {EVENT_CONFIG.collegeName} SIH 2026
+                  {EVENT_CONFIG.collegeName} SIH 2026 Archive
                 </div>
               </div>
 
