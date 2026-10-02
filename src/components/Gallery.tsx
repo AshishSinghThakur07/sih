@@ -74,13 +74,13 @@ export const Gallery: React.FC = () => {
             </h2>
           </motion.div>
 
-          {/* Photo grid: big tile on the left, four small tiles on the right, one banner underneath (spans come from the config) */}
+          {/* Photo grid (12 columns): big tile on the left, four small tiles on the right, three small tiles underneath (spans come from the config) */}
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-60px' }}
             transition={{ staggerChildren: 0.12 }}
-            className="grid grid-cols-1 md:grid-cols-4 auto-rows-[12.5rem] gap-4 sm:gap-5"
+            className="grid grid-cols-1 md:grid-cols-12 auto-rows-[12.5rem] gap-4 sm:gap-5"
           >
             {items.map((item, idx) => (
               <motion.button
@@ -95,6 +95,7 @@ export const Gallery: React.FC = () => {
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 ease-out"
+                  style={{ objectPosition: item.imagePosition }}
                   loading="lazy"
                 />
 
