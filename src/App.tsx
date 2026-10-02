@@ -8,6 +8,7 @@ import { InnovationShowcase } from './components/InnovationShowcase';
 import { Winners } from './components/Winners';
 import { OrganizingTeam } from './components/OrganizingTeam';
 import { Gallery } from './components/Gallery';
+import { CollegeStatement } from './components/CollegeStatement';
 import { Footer } from './components/Footer';
 
 export function App() {
@@ -46,9 +47,12 @@ export function App() {
         {/* 09 — GALLERY & HIGHLIGHTS */}
         <Gallery />
 
+        {/* 10 — COLLEGE STATEMENT */}
+        <CollegeStatement />
+
       </main>
 
-      {/* 10 — FOOTER */}
+      {/* 11 — FOOTER */}
       <Footer />
     </div>
   );

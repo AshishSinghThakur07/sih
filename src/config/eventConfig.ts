@@ -86,6 +86,13 @@ export const EVENT_CONFIG = {
   collegeName: "RRGI",
   collegeFullName: "R.R. Group of Institutions",
   collegeTagline: "Center for Innovation, Research & Entrepreneurship",
+
+  /** PLACEHOLDER: replace `text` with the college's official statement before publishing. */
+  collegeStatement: {
+    label: "A WORD FROM THE COLLEGE",
+    text: "Innovation begins where curiosity meets collaboration. Internal Smart India Hackathon 2026 brought students together to turn ideas into working solutions.",
+    author: "R.R. Group of Institutions",
+  },
   eventName: "Smart India Hackathon",
   eventEdition: "Internal Smart India Hackathon 2026",
   year: "2026",
