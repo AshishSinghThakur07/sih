@@ -38,15 +38,14 @@ export interface ShowcaseProject {
 }
 
 export interface WinnerItem {
-  position: '1st' | '2nd' | '3rd' | 'Special';
+  position: '1st' | '2nd' | '3rd';
   title: string;
   teamName: string;
-  projectTitle: string;
-  category: string;
-  prize?: string;
-  description: string;
+  /** Registration ID, e.g. "RRGI-43". */
+  teamId: string;
+  /** Year of study, e.g. "2nd Year". */
+  year: string;
   members: string[];
-  image?: string;
 }
 
 export interface TeamMember {
@@ -218,25 +217,19 @@ export const EVENT_CONFIG = {
   winners: [
     {
       position: "1st",
-      title: "FIRST PLACE WINNER",
-      teamName: "Team [TEAM NAME 1]",
-      projectTitle: "[PROJECT TITLE 1]",
-      category: "Software / Hardware",
-      prize: "Official SIH 2026 National Nomination",
-      description: "Awarded 1st place for outstanding technical innovation, working prototype demonstration, and high real-world impact.",
-      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+      title: "FIRST PLACE",
+      teamName: "Tech Titans",
+      teamId: "RRGI-43",
+      year: "2nd Year",
+      members: ["Arpit Singh", "Aman Gupta", "Shailendra Singh", "Akash Pandey", "Nancy Singh", "Kuldeep Pandey"]
     },
     {
       position: "2nd",
-      title: "SECOND PLACE WINNER",
-      teamName: "Team [TEAM NAME 2]",
-      projectTitle: "[PROJECT TITLE 2]",
-      category: "Software / Hardware",
-      prize: "Official SIH 2026 National Nomination",
-      description: "Recognized for exemplary prototype performance and practical engineering implementation during the sprint.",
-      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+      title: "SECOND PLACE",
+      teamName: "The Rangers",
+      teamId: "RRGI-02",
+      year: "4th Year",
+      members: ["Anshika Singh", "Muskan Gupta", "Kashish Keshari", "Faisal Ali", "Ayan Ahmed Mansoori", "Saumya Gupta"]
     },
     {
       position: "3rd",

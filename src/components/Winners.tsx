@@ -1,199 +1,218 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { motion, MotionConfig } from 'framer-motion';
+import { Trophy, Medal, ChevronDown } from 'lucide-react';
 import { EVENT_CONFIG, type WinnerItem } from '../config/eventConfig';
-import confetti from 'canvas-confetti';
-import { Trophy, Award, Medal, Sparkles } from 'lucide-react';
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+type Position = WinnerItem['position'];
+
+const ACCENTS: Record<Position, string> = {
+  '1st': '#F58220',
+  '2nd': '#2E9E45',
+  '3rd': '#D08A26',
+};
+
+const RANK: Record<Position, string> = { '1st': '1', '2nd': '2', '3rd': '3' };
+
+const rowVariants = {
+  hidden: { opacity: 0, x: -50 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: EASE } },
+};
 
 export const Winners: React.FC = () => {
   const winners: WinnerItem[] = EVENT_CONFIG.winners;
 
-  const firstPlace = winners.find(w => w.position === '1st');
-  const secondPlace = winners.find(w => w.position === '2nd');
-  const thirdPlace = winners.find(w => w.position === '3rd');
-  const specialAwards = winners.filter(w => w.position === 'Special');
+  // 1st place is open by default.
+  const [open, setOpen] = useState<Position | null>('1st');
 
-  const triggerConfetti = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#F58220', '#2E9E45', '#FFFFFF', '#FBBF24'],
-    });
+  // Rows open by themselves on mouse hover (after a short pause so passing over a row doesn't flicker).
+  const hoverTimer = useRef<number | undefined>(undefined);
+
+  const hoverOpen = (position: Position) => {
+    window.clearTimeout(hoverTimer.current);
+    hoverTimer.current = window.setTimeout(() => setOpen(position), 120);
+  };
+  const cancelHover = () => window.clearTimeout(hoverTimer.current);
+
+  // Click / tap / keyboard always opens the row.
+  const choose = (position: Position) => {
+    cancelHover();
+    setOpen(position);
   };
 
   return (
-    <section id="winners" className="py-24 relative bg-[#080B0D] border-t border-white/5 overflow-hidden">
-      {/* Glow ambient */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#F58220]/15 via-amber-500/10 to-[#2E9E45]/15 rounded-full blur-3xl pointer-events-none" />
+    <MotionConfig reducedMotion="user">
+      <section id="winners" className="py-24 relative border-t border-white/5 overflow-hidden">
+        {/* Glow ambient */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#F58220]/15 via-amber-500/10 to-[#2E9E45]/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#101820] border border-white/10 text-xs font-mono text-[#F58220] uppercase tracking-wider mb-4">
-            <Trophy className="w-4 h-4 text-amber-400" />
-            <span>INSTITUTIONAL HONORS & NOMINATIONS</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
-            WINNERS & RECOGNITION
-          </h2>
-          <p className="mt-3 text-xs font-mono text-zinc-400">
-            Top selected teams nominated to represent RRGI at the National SIH 2026 Grand Finale
-          </p>
-        </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* 1. ELEGANT PODIUM LAYOUT FOR 1ST, 2ND, 3RD PLACE */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-end mb-16">
-          
-          {/* 🥈 SECOND PLACE (Left) */}
-          {secondPlace && (
-            <div className="order-2 lg:order-1 rounded-3xl bg-[#0E1318] border border-white/15 p-6 sm:p-8 shadow-2xl relative overflow-hidden group hover:border-[#2E9E45]/50 transition-all duration-300">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-4xl font-display font-extrabold text-zinc-400">
-                  02
-                </span>
-                <span className="px-3 py-1 rounded-full bg-[#2E9E45]/20 border border-[#2E9E45]/40 text-xs font-mono font-bold text-[#2E9E45]">
-                  🥈 SECOND PLACE
-                </span>
-              </div>
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="text-center mb-14"
+          >
+            <span className="text-xs font-mono text-[#F58220] uppercase tracking-widest font-semibold block mb-2">
+              TOP 3 TEAMS
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
+              WINNERS & RECOGNITION
+            </h2>
+          </motion.div>
 
-              <h3 className="text-xl font-display font-bold text-white mb-1 group-hover:text-[#2E9E45] transition-colors">
-                {secondPlace.teamName}
-              </h3>
-              <p className="text-xs font-mono text-zinc-300 mb-3 font-semibold">
-                {secondPlace.projectTitle}
-              </p>
+          {/* Leaderboard */}
+          <motion.ol
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ staggerChildren: 0.15 }}
+            className="space-y-4"
+          >
+            {winners.map((winner) => {
+              const accent = ACCENTS[winner.position];
+              const isOpen = open === winner.position;
+              const isFirst = winner.position === '1st';
+              const Icon = isFirst ? Trophy : Medal;
+              const panelId = `winner-${winner.position}`;
 
-              <p className="text-xs text-zinc-400 font-sans leading-relaxed mb-4">
-                {secondPlace.description}
-              </p>
-
-              <div className="pt-3 border-t border-white/10">
-                <span className="text-[10px] font-mono text-[#2E9E45] font-bold block mb-1">
-                  RECOGNITION: {secondPlace.prize}
-                </span>
-                <p className="text-[11px] text-zinc-400 font-sans">
-                  {secondPlace.members.join(' • ')}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* 🥇 FIRST PLACE (Center Featured Champion Podium) */}
-          {firstPlace && (
-            <div 
-              onClick={triggerConfetti}
-              className="order-1 lg:order-2 rounded-3xl bg-gradient-to-b from-[#18222C] to-[#0E141B] border-2 border-[#F58220] p-8 sm:p-10 shadow-2xl relative overflow-hidden group hover:scale-102 transition-all duration-300 cursor-pointer"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#F58220]/20 rounded-full blur-2xl pointer-events-none" />
-              
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-6xl font-display font-extrabold text-[#F58220]">
-                  01
-                </span>
-                <span className="px-4 py-1.5 rounded-full bg-[#F58220] text-white text-xs font-mono font-extrabold shadow-lg tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" /> 🥇 1ST PLACE WINNER
-                </span>
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white mb-2 group-hover:text-amber-300 transition-colors">
-                {firstPlace.teamName}
-              </h3>
-              <p className="text-sm font-mono text-[#F58220] mb-4 font-bold">
-                {firstPlace.projectTitle}
-              </p>
-
-              <p className="text-xs text-zinc-200 font-sans leading-relaxed mb-6">
-                {firstPlace.description}
-              </p>
-
-              <div className="pt-4 border-t border-white/15">
-                <span className="text-xs font-mono text-amber-300 font-bold block mb-2">
-                  🏆 {firstPlace.prize}
-                </span>
-                <p className="text-xs text-zinc-300 font-sans leading-normal">
-                  {firstPlace.members.join(' • ')}
-                </p>
-              </div>
-
-              <div className="mt-6 text-center">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block">
-                  Click to celebrate 🎊
-                </span>
-              </div>
-            </div>
-          )}
-
-          {/* 🥉 THIRD PLACE (Right) */}
-          {thirdPlace && (
-            <div className="order-3 rounded-3xl bg-[#0E1318] border border-white/15 p-6 sm:p-8 shadow-2xl relative overflow-hidden group hover:border-amber-500/50 transition-all duration-300">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-4xl font-display font-extrabold text-zinc-400">
-                  03
-                </span>
-                <span className="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-mono font-bold text-amber-400">
-                  🥉 THIRD PLACE
-                </span>
-              </div>
-
-              <h3 className="text-xl font-display font-bold text-white mb-1 group-hover:text-amber-300 transition-colors">
-                {thirdPlace.teamName}
-              </h3>
-              <p className="text-xs font-mono text-zinc-300 mb-3 font-semibold">
-                {thirdPlace.projectTitle}
-              </p>
-
-              <p className="text-xs text-zinc-400 font-sans leading-relaxed mb-4">
-                {thirdPlace.description}
-              </p>
-
-              <div className="pt-3 border-t border-white/10">
-                <span className="text-[10px] font-mono text-amber-400 font-bold block mb-1">
-                  RECOGNITION: {thirdPlace.prize}
-                </span>
-                <p className="text-[11px] text-zinc-400 font-sans">
-                  {thirdPlace.members.join(' • ')}
-                </p>
-              </div>
-            </div>
-          )}
-
-        </div>
-
-        {/* 2. SPECIAL RECOGNITION AWARDS */}
-        {specialAwards.length > 0 && (
-          <div className="p-6 sm:p-8 rounded-3xl bg-[#101820] border border-white/10 shadow-xl">
-            <div className="flex items-center gap-2 mb-6 text-xs font-mono text-[#F58220] font-bold uppercase tracking-widest">
-              <Award className="w-4 h-4 text-amber-400" />
-              <span>SPECIAL JURY RECOGNITION & CATEGORY HONORS</span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {specialAwards.map((award, i) => (
-                <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-[#F58220]/20 text-[#F58220] border border-[#F58220]/40 shrink-0">
-                    <Medal className="w-5 h-5" />
+              const details = (
+                <>
+                  <div>
+                    <span className="block text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Team ID</span>
+                    <span className="block text-sm font-mono font-bold text-white">{winner.teamId}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-amber-300 font-bold block mb-0.5">
-                      {award.title}
-                    </span>
-                    <h4 className="text-base font-display font-bold text-white">
-                      {award.teamName}
-                    </h4>
-                    <p className="text-xs font-mono text-zinc-400">
-                      {award.projectTitle}
-                    </p>
-                    <p className="text-xs text-zinc-400 font-sans mt-1">
-                      {award.description}
-                    </p>
+                    <span className="block text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Year</span>
+                    <span className="block text-sm font-mono font-bold text-white">{winner.year}</span>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+                </>
+              );
 
-      </div>
-    </section>
+              return (
+                <motion.li
+                  key={winner.position}
+                  variants={rowVariants}
+                  onPointerEnter={(e) => {
+                    if (e.pointerType === 'mouse') hoverOpen(winner.position);
+                  }}
+                  onPointerLeave={cancelHover}
+                  style={{ ['--accent' as string]: accent }}
+                  className={`relative overflow-hidden rounded-2xl sm:rounded-3xl border transition-colors duration-500 ${
+                    isOpen
+                      ? 'border-[var(--accent)] bg-gradient-to-r from-[var(--accent)]/20 via-[#0E1318] to-[#0A0E12]'
+                      : 'border-white/10 bg-gradient-to-r from-[#121A22] to-[#0A0E12] hover:border-white/30'
+                  }`}
+                >
+                  {/* Accent bar */}
+                  <span className="absolute inset-y-0 left-0 w-1.5 bg-[var(--accent)]" />
+
+                  {/* Champion glow */}
+                  {isFirst && isOpen && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 animate-pulse-subtle shadow-[inset_0_0_70px_-14px_var(--accent)] pointer-events-none"
+                    />
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => choose(winner.position)}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    className="group relative w-full flex items-center gap-3 sm:gap-6 p-4 sm:p-6 pl-5 sm:pl-8 text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
+                  >
+                    {/* Rank */}
+                    <span className="w-9 sm:w-16 shrink-0 text-5xl sm:text-7xl font-display font-extrabold leading-none text-[var(--accent)]">
+                      {RANK[winner.position]}
+                    </span>
+
+                    {/* Medal */}
+                    <motion.div
+                      className="shrink-0"
+                      animate={isFirst ? { y: [0, -5, 0] } : undefined}
+                      transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                      <div
+                        className={`flex items-center justify-center rounded-xl sm:rounded-2xl border transition-colors duration-300 w-10 h-10 sm:w-14 sm:h-14 ${
+                          isOpen
+                            ? 'bg-white text-[var(--accent)] border-white'
+                            : 'bg-[#101820] text-[var(--accent)] border-[var(--accent)]/50'
+                        }`}
+                      >
+                        <Icon className="w-5 h-5 sm:w-7 sm:h-7" />
+                      </div>
+                    </motion.div>
+
+                    {/* Team name (+ details on small screens) */}
+                    <div className="flex-1 min-w-0">
+                      <span className="block text-[10px] sm:text-[11px] font-mono font-bold text-[var(--accent)] tracking-[0.25em] uppercase">
+                        {winner.title}
+                      </span>
+                      <h3 className="text-xl sm:text-4xl font-display font-extrabold text-white uppercase leading-tight tracking-tight truncate">
+                        {winner.teamName}
+                      </h3>
+                      <div className="sm:hidden mt-1.5 flex gap-5">{details}</div>
+                    </div>
+
+                    {/* Details on larger screens */}
+                    <div className="hidden sm:flex gap-10 shrink-0 pr-2">{details}</div>
+
+                    <ChevronDown
+                      className={`w-5 h-5 shrink-0 text-zinc-400 group-hover:text-white transition-transform duration-500 ${
+                        isOpen ? 'rotate-180 text-white' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {/* Members */}
+                  <div
+                    id={panelId}
+                    role="region"
+                    className={`relative grid transition-[grid-template-rows] duration-500 ease-out ${
+                      isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-5 sm:px-8 pb-5 sm:pb-6 pt-1">
+                        <span className="block mb-3 text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
+                          Team Members
+                        </span>
+                        <motion.ul
+                          key={isOpen ? 'open' : 'closed'}
+                          initial="hidden"
+                          animate={isOpen ? 'show' : 'hidden'}
+                          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.25 } } }}
+                          className="flex flex-wrap lg:flex-nowrap gap-2"
+                        >
+                          {winner.members.map((name) => (
+                            <motion.li
+                              key={name}
+                              variants={{
+                                hidden: { opacity: 0, x: -10 },
+                                show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: EASE } },
+                              }}
+                              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/10"
+                            >
+                              <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                              <span className="text-xs lg:text-[13px] font-sans text-zinc-100 whitespace-nowrap">{name}</span>
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                      </div>
+                    </div>
+                  </div>
+                </motion.li>
+              );
+            })}
+          </motion.ol>
+
+        </div>
+      </section>
+    </MotionConfig>
   );
 };
