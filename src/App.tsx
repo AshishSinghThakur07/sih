@@ -2,7 +2,6 @@ import { CustomCursor } from './components/CustomCursor';
 import { ParticleBackground } from './components/ParticleBackground';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
 import { HackathonGlance } from './components/HackathonGlance';
 import { EventJourney } from './components/EventJourney';
 import { InnovationShowcase } from './components/InnovationShowcase';
@@ -30,8 +29,6 @@ export function App() {
         {/* 02 — HERO */}
         <Hero />
 
-        {/* 03 — ABOUT INTERNAL SIH */}
-        <About />
 
         {/* 04 — HACKATHON AT A GLANCE */}
         <HackathonGlance />
