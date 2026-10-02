@@ -133,7 +133,7 @@ export const EVENT_CONFIG = {
       id: "stat-3",
       label: "PROJECTS SHOWCASED",
       value: "50+",
-      subtext: "Hardware & Simulator Projects",
+      subtext: "Hardware, Software & Simulator Projects",
       icon: "Cpu"
     }
   ] as StatItem[],
@@ -194,9 +194,9 @@ export const EVENT_CONFIG = {
     },
     {
       id: "proj-2",
-      title: "[HARDWARE PROJECT 2]",
+      title: "[SOFTWARE PROJECT 2]",
       teamName: "Team [TEAM NAME]",
-      category: "Hardware",
+      category: "Software",
       domain: "[Domain]",
       description: "[Short description of the project.]",
       techStack: ["[Tech 1]", "[Tech 2]"],
@@ -218,9 +218,9 @@ export const EVENT_CONFIG = {
     },
     {
       id: "proj-4",
-      title: "[HARDWARE PROJECT 4]",
+      title: "[SOFTWARE PROJECT 4]",
       teamName: "Team [TEAM NAME]",
-      category: "Hardware",
+      category: "Software",
       domain: "[Domain]",
       description: "[Short description of the project.]",
       techStack: ["[Tech 1]", "[Tech 2]"],

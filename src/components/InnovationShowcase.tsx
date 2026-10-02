@@ -21,15 +21,15 @@ export const InnovationShowcase: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#101820] border border-white/10 text-xs font-mono text-[#F58220] uppercase tracking-wider mb-4">
               <Cpu className="w-3.5 h-3.5 text-[#2E9E45]" />
-              <span>BUILT BY FIRST-YEAR STUDENTS</span>
+              <span>STUDENT PROJECTS</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight leading-tight">
-              BEST HARDWARE PROJECTS
+              BEST PROJECTS
             </h2>
           </div>
 
           <p className="mt-4 md:mt-0 text-sm text-zinc-400 max-w-md font-sans">
-            Hands-on hardware and simulator builds by RRGI first-year teams during Internal SIH 2026.
+            Working hardware and software projects built by RRGI student teams during Internal SIH 2026.
           </p>
         </div>
 

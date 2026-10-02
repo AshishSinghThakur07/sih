@@ -35,7 +35,7 @@ export function App() {
         {/* 05 — EVENT JOURNEY */}
         <EventJourney />
 
-        {/* 06 — BEST HARDWARE PROJECTS */}
+        {/* 06 — BEST PROJECTS */}
         <InnovationShowcase />
 
         {/* 07 — WINNERS & RECOGNITION */}
