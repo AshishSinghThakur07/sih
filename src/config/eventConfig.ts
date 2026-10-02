@@ -93,35 +93,28 @@ export const EVENT_CONFIG = {
     iic: iicLogo,
   },
 
-  // Key Event Metrics (Using real structure with clean placeholders)
+  // Key Event Metrics
   stats: [
     {
       id: "stat-1",
       label: "TOTAL PARTICIPANTS",
-      value: "[XX]",
+      value: "400+",
       subtext: "Student Innovators Across Departments",
       icon: "Users"
     },
     {
       id: "stat-2",
       label: "TEAMS PARTICIPATED",
-      value: "[XX]",
+      value: "70+",
       subtext: "Multidisciplinary 6-Member Teams",
       icon: "ShieldCheck"
     },
     {
       id: "stat-3",
       label: "PROJECTS SHOWCASED",
-      value: "[XX]",
-      subtext: "Software & Hardware Prototypes",
+      value: "50+",
+      subtext: "Hardware & Simulator Projects",
       icon: "Cpu"
-    },
-    {
-      id: "stat-4",
-      label: "NATIONAL NOMINEES",
-      value: "[XX]",
-      subtext: "Selected for National SIH Portal",
-      icon: "Trophy"
     }
   ] as StatItem[],
 
