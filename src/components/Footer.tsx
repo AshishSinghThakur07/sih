@@ -1,10 +1,10 @@
 import React from 'react';
 import { EVENT_CONFIG } from '../config/eventConfig';
-import { Mail, Phone, MapPin, Shield } from 'lucide-react';
+import { Mail, Phone, MapPin, Shield, Globe } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#050709] border-t border-white/10 pt-14 pb-10 text-zinc-400 font-sans text-xs">
+    <footer className="relative z-10 bg-[#050709]/40 border-t border-white/10 pt-14 pb-10 text-zinc-400 font-sans text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
@@ -49,12 +49,11 @@ export const Footer: React.FC = () => {
               ARCHIVE NAVIGATION
             </h4>
             <ul className="space-y-2 text-xs font-mono">
-              <li><a href="#about" className="hover:text-[#F58220] transition-colors">About Event</a></li>
               <li><a href="#glance" className="hover:text-[#F58220] transition-colors">At A Glance</a></li>
               <li><a href="#journey" className="hover:text-[#F58220] transition-colors">Completed Journey</a></li>
-              <li><a href="#projects" className="hover:text-[#F58220] transition-colors">Innovation Showcase</a></li>
+              <li><a href="#projects" className="hover:text-[#F58220] transition-colors">Best Hardware Projects</a></li>
               <li><a href="#winners" className="hover:text-[#F58220] transition-colors">Winners & Recognition</a></li>
-              <li><a href="#team" className="hover:text-[#F58220] transition-colors">Committee & Judges</a></li>
+              <li><a href="#team" className="hover:text-[#F58220] transition-colors">Organizing Team</a></li>
               <li><a href="#gallery" className="hover:text-[#F58220] transition-colors">Event Gallery</a></li>
             </ul>
           </div>
@@ -70,13 +69,38 @@ export const Footer: React.FC = () => {
                 <span>{EVENT_CONFIG.venue}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#2E9E45] shrink-0" />
-                <span>{EVENT_CONFIG.contactEmail}</span>
+                <Globe className="w-3.5 h-3.5 text-[#2E9E45] shrink-0" />
+                <a
+                  href={`https://${EVENT_CONFIG.website}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#F58220] transition-colors"
+                >
+                  {EVENT_CONFIG.website}
+                </a>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#F58220] shrink-0" />
-                <span>{EVENT_CONFIG.phone}</span>
+              <div className="flex items-start gap-2">
+                <Phone className="w-3.5 h-3.5 text-[#F58220] shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-1">
+                  {EVENT_CONFIG.phones.map((number) => (
+                    <a
+                      key={number}
+                      href={`tel:${number.replace(/\s+/g, '')}`}
+                      className="hover:text-[#F58220] transition-colors"
+                    >
+                      {number}
+                    </a>
+                  ))}
+                </div>
               </div>
+              {EVENT_CONFIG.contactEmail && (
+                <div className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-[#2E9E45] shrink-0" />
+                  <a href={`mailto:${EVENT_CONFIG.contactEmail}`} className="hover:text-[#F58220] transition-colors">
+                    {EVENT_CONFIG.contactEmail}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 

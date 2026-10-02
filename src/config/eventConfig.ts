@@ -90,9 +90,11 @@ export const EVENT_CONFIG = {
   subtitle: "Digital Event Showcase & Archive",
   
   eventDate: "[EVENT DATE]",
-  venue: "RRGI Campus Auditorium & Innovation Block",
-  contactEmail: "[CONTACT EMAIL]",
-  phone: "[PHONE NUMBER]",
+  venue: "RRGI, Lucknow, Uttar Pradesh",
+  website: "www.rrimt.ac.in",
+  phones: ["+91 8564025922", "+91 8565852174"],
+  /** Leave empty to hide the email line in the footer. */
+  contactEmail: "",
 
   logos: {
     sih: sihLogo,
