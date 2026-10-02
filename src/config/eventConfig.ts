@@ -32,6 +32,8 @@ export interface ShowcaseProject {
   techStack: string[];
   teamMembers?: string[];
   image: string;
+  /** CSS object-position for the photo crop, e.g. "50% 75%" to keep faces in frame. */
+  imagePosition?: string;
   isFeatured?: boolean;
 }
 
@@ -144,14 +146,14 @@ export const EVENT_CONFIG = {
       icon: "Cpu"
     },
     {
-      step: "06",
+      step: "04",
       title: "JURY EVALUATION",
       subtitle: "Live System Demos",
       description: "Distinguished judges evaluated functioning prototypes on innovation, impact, and technical execution.",
-      icon: "CheckCircle2"
+      icon: "Gavel"
     },
     {
-      step: "07",
+      step: "05",
       title: "RECOGNITION & NOMINATION",
       subtitle: "Valedictory Awards",
       description: "Top winning teams were recognized and officially nominated to the National SIH 2026 Portal.",
@@ -163,49 +165,50 @@ export const EVENT_CONFIG = {
   projects: [
     {
       id: "proj-1",
-      title: "[AI TRAFFIC CONGESTION & EMERGENCY DISPATCH]",
-      teamName: "Team [ALPHA INNOVATORS]",
-      category: "Software",
-      domain: "Smart Vehicles & Mobility",
-      description: "Computer vision and edge AI telemetry system designed to dynamically adjust urban signal timers and clear green corridors for emergency response vehicles.",
-      techStack: ["Python", "YOLOv8", "OpenCV", "TensorFlow", "React"],
-      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+      title: "[DRONE SIMULATOR]",
+      teamName: "Team [TEAM NAME]",
+      category: "Hardware",
+      domain: "Drones & Simulation",
+      description: "[One or two lines on what the drone simulator does and what the team built.]",
+      techStack: ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4"],
+      image: "/projects/drone-team.jpg",
+      imagePosition: "50% 30%",
       isFeatured: true
     },
     {
       id: "proj-2",
-      title: "[OFFLINE EDGE-AI PLANT DISEASE DETECTOR]",
-      teamName: "Team [AGRI-TECH LABS]",
+      title: "[HARDWARE PROJECT 2]",
+      teamName: "Team [TEAM NAME]",
       category: "Hardware",
-      domain: "Agriculture & Rural Tech",
-      description: "Portable IoT edge camera system running lightweight neural networks to detect crop leaf blights offline in remote farmlands.",
-      techStack: ["Raspberry Pi", "TensorFlow Lite", "Embedded C++", "Flutter"],
-      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
+      domain: "[Domain]",
+      description: "[Short description of the project.]",
+      techStack: ["[Tech 1]", "[Tech 2]"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4"],
       image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
       isFeatured: false
     },
     {
       id: "proj-3",
-      title: "[BLOCKCHAIN MARKSHEET VERIFICATION SYSTEM]",
-      teamName: "Team [CYBER SHIELD]",
-      category: "Software",
-      domain: "Blockchain & Security",
-      description: "Decentralized document verification registry allowing instant QR-based validation of academic credentials to prevent certificate forgery.",
-      techStack: ["Solidity", "Polygon", "IPFS", "Node.js", "React"],
-      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+      title: "[HARDWARE PROJECT 3]",
+      teamName: "Team [TEAM NAME]",
+      category: "Hardware",
+      domain: "[Domain]",
+      description: "[Short description of the project.]",
+      techStack: ["[Tech 1]", "[Tech 2]"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4"],
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
       isFeatured: false
     },
     {
       id: "proj-4",
-      title: "[AUTONOMOUS WASTE SEGREGATION ROBOTIC ARM]",
-      teamName: "Team [ROBO MATICS]",
+      title: "[HARDWARE PROJECT 4]",
+      teamName: "Team [TEAM NAME]",
       category: "Hardware",
-      domain: "Clean & Green Tech",
-      description: "Robotic arm integrated with optical spectral sensors to classify and sort recyclable plastics, metals, and organic municipal waste.",
-      techStack: ["ROS2", "OpenCV", "PyTorch", "Arduino", "3D Modeling"],
-      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4", "Member 5", "Member 6"],
+      domain: "[Domain]",
+      description: "[Short description of the project.]",
+      techStack: ["[Tech 1]", "[Tech 2]"],
+      teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4"],
       image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
       isFeatured: false
     }

@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { EVENT_CONFIG, type ShowcaseProject } from '../config/eventConfig';
 import { Cpu, Sparkles } from 'lucide-react';
 
 export const InnovationShowcase: React.FC = () => {
-  const [selectedFilter, setSelectedFilter] = useState<'All' | 'Software' | 'Hardware'>('All');
-
   const projects: ShowcaseProject[] = EVENT_CONFIG.projects;
 
-  const filteredProjects = selectedFilter === 'All' 
-    ? projects 
-    : projects.filter(p => p.category === selectedFilter);
-
   const featuredProject = projects.find(p => p.isFeatured) || projects[0];
+  // The featured project has its own large card above, so it is left out of the grid.
+  const otherProjects = projects.filter(p => p.id !== featuredProject?.id);
 
   return (
-    <section id="projects" className="py-24 relative bg-[#080B0D] border-t border-white/5">
+    <section id="projects" className="py-24 relative border-t border-white/5">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#F58220]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -25,37 +21,20 @@ export const InnovationShowcase: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#101820] border border-white/10 text-xs font-mono text-[#F58220] uppercase tracking-wider mb-4">
               <Cpu className="w-3.5 h-3.5 text-[#2E9E45]" />
-              <span>STUDENT INVENTIONS & PROTOTYPES</span>
+              <span>BUILT BY FIRST-YEAR STUDENTS</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight leading-tight">
-              INNOVATION SHOWCASE
+              BEST HARDWARE PROJECTS
             </h2>
           </div>
 
           <p className="mt-4 md:mt-0 text-sm text-zinc-400 max-w-md font-sans">
-            Working software systems and physical hardware prototypes developed by RRGI student teams during Internal SIH 2026.
+            Hands-on hardware and simulator builds by RRGI first-year teams during Internal SIH 2026.
           </p>
         </div>
 
-        {/* Filter Chips */}
-        <div className="flex items-center gap-2 mb-10">
-          {(['All', 'Software', 'Hardware'] as const).map(filter => (
-            <button
-              key={filter}
-              onClick={() => setSelectedFilter(filter)}
-              className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all ${
-                selectedFilter === filter
-                  ? 'bg-[#F58220] text-white shadow-lg shadow-[#F58220]/20'
-                  : 'glass-panel text-zinc-400 hover:text-white border border-white/10'
-              }`}
-            >
-              {filter === 'All' ? 'All Projects' : `${filter} Prototypes`}
-            </button>
-          ))}
-        </div>
-
         {/* 1. FEATURED PROJECT HIGHLIGHT (Editorial Hero Card) */}
-        {featuredProject && selectedFilter === 'All' && (
+        {featuredProject && (
           <div className="mb-14 rounded-3xl bg-gradient-to-br from-[#101820] via-[#0E1318] to-[#0A0E12] border border-white/15 p-6 sm:p-10 shadow-2xl relative overflow-hidden group">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
@@ -65,10 +44,11 @@ export const InnovationShowcase: React.FC = () => {
                   src={featuredProject.image}
                   alt={featuredProject.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  style={{ objectPosition: featuredProject.imagePosition }}
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-[#F58220] text-white text-[11px] font-mono font-bold uppercase tracking-wider shadow-lg">
-                    FEATURED INNOVATION
+                    BEST PROJECT
                   </span>
                 </div>
               </div>
@@ -125,10 +105,10 @@ export const InnovationShowcase: React.FC = () => {
 
         {/* 2. SUPPORTING PROJECTS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map(project => (
+          {otherProjects.map(project => (
             <div
               key={project.id}
-              className="group rounded-3xl bg-[#0E1318] border border-white/10 hover:border-[#F58220]/40 transition-all duration-300 hover:-translate-y-1 shadow-xl overflow-hidden flex flex-col justify-between"
+              className="group rounded-3xl bg-[#0E1318]/80 border border-white/10 hover:border-[#F58220]/40 transition-all duration-300 hover:-translate-y-1 shadow-xl overflow-hidden flex flex-col justify-between"
             >
               <div>
                 {/* Image */}
@@ -137,6 +117,7 @@ export const InnovationShowcase: React.FC = () => {
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ objectPosition: project.imagePosition }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E1318] via-transparent to-transparent opacity-80" />
                   
