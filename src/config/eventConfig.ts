@@ -283,7 +283,7 @@ export const EVENT_CONFIG = {
       title: "36-Hour Innovation Build Sprint",
       category: "Coding & Prototyping",
       image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
-      aspect: "col-span-1 md:col-span-2 row-span-2",
+      aspect: "md:col-span-2 md:row-span-2",
       description: "RRGI student teams collaborating during the overnight build phase in the Innovation Block."
     },
     {
@@ -291,7 +291,7 @@ export const EVENT_CONFIG = {
       title: "Hardware & Robotics Assembly",
       category: "Hardware Track",
       image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
+      aspect: "",
       description: "Microcontroller wiring, sensor calibration, and prototype assembly by engineering teams."
     },
     {
@@ -299,7 +299,7 @@ export const EVENT_CONFIG = {
       title: "Jury Demonstration & Prototype Pitch",
       category: "Evaluation Round",
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
+      aspect: "",
       description: "Teams presenting system architecture and functioning models before external judges."
     },
     {
@@ -307,7 +307,7 @@ export const EVENT_CONFIG = {
       title: "Faculty Mentorship & Guidance",
       category: "Mentorship",
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
+      aspect: "",
       description: "Senior faculty mentors conducting 1-on-1 code reviews and architecture refinements."
     },
     {
@@ -315,7 +315,7 @@ export const EVENT_CONFIG = {
       title: "Inaugural Session & Keynote Address",
       category: "Event Ceremony",
       image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80",
-      aspect: "col-span-1 md:col-span-2 row-span-1",
+      aspect: "",
       description: "Opening ceremony at RRGI Auditorium marking the official launch of Internal SIH 2026."
     },
     {
@@ -323,7 +323,7 @@ export const EVENT_CONFIG = {
       title: "Valedictory Awards & National Nomination",
       category: "Winners Ceremony",
       image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-      aspect: "col-span-1 row-span-1",
+      aspect: "md:col-span-4",
       description: "Top winning teams receiving official SIH 2026 nomination certificates and honors."
     }
   ] as GalleryItem[],
