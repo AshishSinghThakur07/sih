@@ -18,6 +18,8 @@ export interface JourneyStage {
   subtitle: string;
   description: string;
   icon: string;
+  /** Optional photo shown behind the panel, e.g. "/journey/01-ideation.jpg" (file lives in /public/journey). */
+  image?: string;
 }
 
 export interface ShowcaseProject {
@@ -122,38 +124,24 @@ export const EVENT_CONFIG = {
   journey: [
     {
       step: "01",
-      title: "IDEATION & SELECTION",
+      title: "IDEATION & TEAMS",
       subtitle: "Challenge Mapping",
-      description: "Student teams analyzed national problem statements and formulated innovation blueprints.",
+      description: "Student teams analyzed national problem statements, formed 6-member cross-disciplinary teams and formulated innovation blueprints.",
       icon: "Lightbulb"
     },
     {
       step: "02",
-      title: "TEAM FORMATION",
-      subtitle: "Cross-Disciplinary Unity",
-      description: "Assembled 6-member teams incorporating diverse engineering departments and mandatory female leadership.",
-      icon: "Users"
+      title: "INTERNAL SCREENING",
+      subtitle: "Abstract Review",
+      description: "Panel of faculty evaluators screened initial solution architectures for technical feasibility.",
+      icon: "ClipboardCheck"
     },
     {
       step: "03",
-      title: "INTERNAL SCREENING",
-      subtitle: "Proposal Abstract Review",
-      description: "Panel of faculty evaluators screened initial solution architectures for technical feasibility.",
-      icon: "FileSearch"
-    },
-    {
-      step: "04",
-      title: "MENTORSHIP SPRINT",
-      subtitle: "1-on-1 Guidance",
-      description: "Expert mentors provided live feedback on database design, hardware wiring, and algorithmic efficiency.",
-      icon: "Presentation"
-    },
-    {
-      step: "05",
-      title: "CONTINUOUS PROTOTYPING",
-      subtitle: "36-Hour Build Phase",
-      description: "Intensive hands-on sprint at the RRGI Innovation Block creating working software and physical models.",
-      icon: "Code"
+      title: "MENTORSHIP & BUILD",
+      subtitle: "36-Hour Sprint",
+      description: "Expert mentors guided teams through an intensive hands-on build at the RRGI Innovation Block, creating working software and physical models.",
+      icon: "Cpu"
     },
     {
       step: "06",
