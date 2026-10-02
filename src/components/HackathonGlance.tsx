@@ -1,10 +1,11 @@
 import React from 'react';
 import { EVENT_CONFIG } from '../config/eventConfig';
-import { Users, ShieldCheck, Cpu, Trophy, Clock, Award, Building2 } from 'lucide-react';
+import { CountUp } from './CountUp';
+import { Users, ShieldCheck, Cpu, Clock, Award, Building2 } from 'lucide-react';
 
 export const HackathonGlance: React.FC = () => {
   return (
-    <section id="glance" className="py-20 relative bg-[#080B0D] border-t border-white/5">
+    <section id="glance" className="py-20 relative border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -21,9 +22,9 @@ export const HackathonGlance: React.FC = () => {
         </div>
 
         {/* Executive Stats Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          <div className="group p-6 rounded-3xl bg-[#0E1318] border border-white/10 hover:border-[#F58220]/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+          <div className="group p-6 rounded-3xl bg-[#0E1318]/80 border border-white/10 hover:border-[#F58220]/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-bold">
                 METRIC 01
@@ -34,7 +35,7 @@ export const HackathonGlance: React.FC = () => {
             </div>
             <div>
               <span className="text-4xl sm:text-5xl font-display font-extrabold text-white block">
-                {EVENT_CONFIG.stats[0]?.value}
+                <CountUp value={EVENT_CONFIG.stats[0]?.value ?? ''} />
               </span>
               <h3 className="text-sm font-display font-bold text-zinc-200 mt-1">
                 {EVENT_CONFIG.stats[0]?.label}
@@ -45,7 +46,7 @@ export const HackathonGlance: React.FC = () => {
             </div>
           </div>
 
-          <div className="group p-6 rounded-3xl bg-[#0E1318] border border-white/10 hover:border-[#2E9E45]/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+          <div className="group p-6 rounded-3xl bg-[#0E1318]/80 border border-white/10 hover:border-[#2E9E45]/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-bold">
                 METRIC 02
@@ -56,7 +57,7 @@ export const HackathonGlance: React.FC = () => {
             </div>
             <div>
               <span className="text-4xl sm:text-5xl font-display font-extrabold text-white block">
-                {EVENT_CONFIG.stats[1]?.value}
+                <CountUp value={EVENT_CONFIG.stats[1]?.value ?? ''} />
               </span>
               <h3 className="text-sm font-display font-bold text-zinc-200 mt-1">
                 {EVENT_CONFIG.stats[1]?.label}
@@ -67,7 +68,7 @@ export const HackathonGlance: React.FC = () => {
             </div>
           </div>
 
-          <div className="group p-6 rounded-3xl bg-[#0E1318] border border-white/10 hover:border-amber-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+          <div className="group p-6 rounded-3xl bg-[#0E1318]/80 border border-white/10 hover:border-amber-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-bold">
                 METRIC 03
@@ -78,35 +79,13 @@ export const HackathonGlance: React.FC = () => {
             </div>
             <div>
               <span className="text-4xl sm:text-5xl font-display font-extrabold text-white block">
-                {EVENT_CONFIG.stats[2]?.value}
+                <CountUp value={EVENT_CONFIG.stats[2]?.value ?? ''} />
               </span>
               <h3 className="text-sm font-display font-bold text-zinc-200 mt-1">
                 {EVENT_CONFIG.stats[2]?.label}
               </h3>
               <p className="text-xs text-zinc-400 mt-1 font-sans">
                 {EVENT_CONFIG.stats[2]?.subtext}
-              </p>
-            </div>
-          </div>
-
-          <div className="group p-6 rounded-3xl bg-[#0E1318] border border-white/10 hover:border-[#F58220]/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-bold">
-                METRIC 04
-              </span>
-              <div className="p-2.5 rounded-2xl bg-[#101820] text-[#F58220] border border-white/10">
-                <Trophy className="w-5 h-5" />
-              </div>
-            </div>
-            <div>
-              <span className="text-4xl sm:text-5xl font-display font-extrabold text-white block">
-                {EVENT_CONFIG.stats[3]?.value}
-              </span>
-              <h3 className="text-sm font-display font-bold text-zinc-200 mt-1">
-                {EVENT_CONFIG.stats[3]?.label}
-              </h3>
-              <p className="text-xs text-zinc-400 mt-1 font-sans">
-                {EVENT_CONFIG.stats[3]?.subtext}
               </p>
             </div>
           </div>
@@ -118,7 +97,7 @@ export const HackathonGlance: React.FC = () => {
           <div className="flex items-center gap-3 text-left">
             <Clock className="w-5 h-5 text-[#F58220]" />
             <div>
-              <span className="text-xs font-mono font-bold text-white block">36-HOUR SPRINT</span>
+              <span className="text-xs font-mono font-bold text-white block">3-DAY SPRINT (36 HRS)</span>
               <span className="text-[11px] text-zinc-400 font-sans">Continuous Prototyping</span>
             </div>
           </div>
