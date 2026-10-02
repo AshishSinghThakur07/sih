@@ -34,7 +34,7 @@ export function App() {
         {/* 05 — EVENT JOURNEY */}
         <EventJourney />
 
-        {/* 06 — INNOVATION SHOWCASE */}
+        {/* 06 — BEST HARDWARE PROJECTS */}
         <InnovationShowcase />
 
         {/* 07 — WINNERS & RECOGNITION */}
@@ -48,7 +48,7 @@ export function App() {
 
       </main>
 
-      {/* 12 — FOOTER */}
+      {/* 10 — FOOTER */}
       <Footer />
     </div>
   );
