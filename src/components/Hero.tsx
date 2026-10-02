@@ -1,54 +1,15 @@
 import React from 'react';
 import { EVENT_CONFIG } from '../config/eventConfig';
-import { Hero3DCanvas } from './Hero3DCanvas';
+import { CountUp } from './CountUp';
 import { ArrowDown, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="home" className="relative min-h-[92vh] pt-32 pb-20 flex items-center justify-center overflow-hidden bg-[#080B0D] bg-grid-pattern">
-      {/* 3D WebGL Background Canvas */}
-      <Hero3DCanvas />
+    <section id="home" className="relative min-h-[92vh] pt-32 pb-20 flex items-center justify-center overflow-hidden">
 
       {/* Main Hero Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         
-        {/* TOP: Dual Official Brand Composition [RRGI LOGO] + [SIH LOGO] */}
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6 p-3 sm:p-4 rounded-3xl bg-[#101820]/90 border border-white/10 shadow-2xl backdrop-blur-xl">
-          <div className="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white/5 border border-white/10">
-            <img
-              src={EVENT_CONFIG.logos.college}
-              alt="R.R. Group of Institutions Logo"
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
-            <div className="text-left hidden sm:block">
-              <span className="text-xs font-display font-extrabold text-white block tracking-wide">
-                {EVENT_CONFIG.collegeName}
-              </span>
-              <span className="text-[10px] font-mono text-zinc-400">
-                R.R. Group of Institutions
-              </span>
-            </div>
-          </div>
-
-          <span className="text-zinc-600 font-mono text-sm hidden sm:inline">•</span>
-
-          <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 border border-white/10">
-            <img
-              src={EVENT_CONFIG.logos.sih}
-              alt="Smart India Hackathon Logo"
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
-            <div className="text-left hidden sm:block">
-              <span className="text-xs font-display font-extrabold text-white block tracking-wide">
-                SMART INDIA HACKATHON
-              </span>
-              <span className="text-[10px] font-mono text-[#F58220] font-bold">
-                INTERNAL EDITION 2026
-              </span>
-            </div>
-          </div>
-        </div>
-
         {/* Status Badge: Event Completed */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2E9E45]/15 border border-[#2E9E45]/40 mb-6 backdrop-blur-md">
           <CheckCircle2 className="w-4 h-4 text-[#2E9E45]" />
@@ -99,11 +60,11 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Hero Quick Statistics Strip */}
-        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-3xl bg-[#101820]/80 border border-white/10 backdrop-blur-xl shadow-2xl mb-12">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-3xl bg-[#101820]/80 border border-white/10 backdrop-blur-xl shadow-2xl mb-12">
           {EVENT_CONFIG.stats.map(s => (
             <div key={s.id} className="p-3 text-center border-r last:border-r-0 border-white/5">
               <span className="text-2xl sm:text-3xl font-display font-extrabold text-white block">
-                {s.value}
+                <CountUp value={s.value} />
               </span>
               <span className="text-[11px] font-mono text-[#F58220] font-bold uppercase block mt-0.5">
                 {s.label}
@@ -114,7 +75,7 @@ export const Hero: React.FC = () => {
 
         {/* Scroll Indicator */}
         <a
-          href="#about"
+          href="#glance"
           className="inline-flex flex-col items-center text-xs font-mono text-zinc-500 hover:text-[#F58220] transition-colors group"
         >
           <span className="tracking-widest uppercase mb-2">SCROLL TO DISCOVER</span>
