@@ -51,12 +51,18 @@ export interface WinnerItem {
 export interface TeamMember {
   id: string;
   name: string;
+  /** Event role, shown as the highlighted label. */
   role: string;
-  category: 'Leadership' | 'Judge' | 'Faculty' | 'Student';
+  /** Position at the institution. */
   designation: string;
-  department?: string;
-  image: string;
-  bio?: string;
+  /** Optional portrait, e.g. "/team/spoc.jpg" (file lives in /public/team). Falls back to initials. */
+  image?: string;
+}
+
+export interface StudentVolunteers {
+  title: string;
+  count: string;
+  description: string;
 }
 
 export interface GalleryItem {
@@ -233,112 +239,41 @@ export const EVENT_CONFIG = {
     },
     {
       position: "3rd",
-      title: "THIRD PLACE WINNER",
-      teamName: "Team [TEAM NAME 3]",
-      projectTitle: "[PROJECT TITLE 3]",
-      category: "Software / Hardware",
-      prize: "Official SIH 2026 National Nomination",
-      description: "Secured third place with an impressive demonstration of problem-solving rigor and system reliability.",
-      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      position: "Special",
-      title: "BEST HARDWARE INNOVATION",
-      teamName: "Team [TEAM NAME 4]",
-      projectTitle: "[SPECIAL PROJECT TITLE]",
-      category: "Hardware & IoT",
-      prize: "Special Jury Recognition",
-      description: "Awarded special jury recognition for best hardware prototype assembly and physical integration.",
-      members: ["Lead: [STUDENT NAME]", "Member: [STUDENT NAME]", "Member: [STUDENT NAME]"],
-      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+      title: "THIRD PLACE",
+      teamName: "Variants",
+      teamId: "RRGI-13",
+      year: "3rd Year",
+      members: ["Sunny Pandey", "Ansh Asthana", "Yogesh Vishwakarma", "Priyanshu Shukla", "Arthik Dwivedi", "Praveshika Singh"]
     }
   ] as WinnerItem[],
 
-  // Event Team & Leadership
+  // Organizing Team
   team: {
-    leadership: [
+    leaders: [
       {
         id: "t-1",
-        name: "[SPOC NAME]",
-        role: "SIH Single Point of Contact (SPOC)",
-        category: "Leadership",
-        designation: "Professor & Head of Department",
-        department: "Department of Computer Science & Engineering",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-        bio: "Led overall institutional SIH 2026 execution, jury panel coordination, and portal candidate nominations."
+        name: "Ms. Aarti Jaiswal",
+        role: "SIH SPOC",
+        designation: "Dean – Training & Placement"
       },
       {
         id: "t-2",
-        name: "[FACULTY CONVENER NAME]",
-        role: "Faculty Convener & IIC Lead",
-        category: "Leadership",
-        designation: "Associate Professor",
-        department: "Department of Information Technology",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-        bio: "Managed technical mentoring logistics, venue infrastructure, and internal evaluation standards."
-      }
-    ],
-    judges: [
+        name: "Harendra Kr. Prajapati",
+        role: "Hackathon Advisor & Event Head",
+        designation: "Event Head – Internal SIH 2026"
+      },
       {
         id: "t-3",
-        name: "[JUDGE NAME 1]",
-        role: "External Technical Judge",
-        category: "Judge",
-        designation: "Industry Principal Architect",
-        department: "Technology Evaluation Jury",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
-      },
-      {
-        id: "t-4",
-        name: "[JUDGE NAME 2]",
-        role: "Academic Evaluator",
-        category: "Judge",
-        designation: "Senior Research Fellow",
-        department: "Innovation & R&D Cell",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
+        name: "Anurag Pandey",
+        role: "HOD – Training & Placement",
+        designation: "Head of Department"
       }
-    ],
-    faculty: [
-      {
-        id: "t-5",
-        name: "[FACULTY MENTOR 1]",
-        role: "Software Track Mentor",
-        category: "Faculty",
-        designation: "Assistant Professor",
-        department: "Dept. of Computer Science & Engineering",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
-      },
-      {
-        id: "t-6",
-        name: "[FACULTY MENTOR 2]",
-        role: "Hardware & Robotics Mentor",
-        category: "Faculty",
-        designation: "Associate Professor",
-        department: "Dept. of Electrical & Electronics Engg",
-        image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
-      }
-    ],
-    students: [
-      {
-        id: "t-7",
-        name: "[STUDENT COORDINATOR 1]",
-        role: "Overall Student Convener",
-        category: "Student",
-        designation: "Final Year Student Leader",
-        department: "RRGI Student Innovation Club",
-        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80"
-      },
-      {
-        id: "t-8",
-        name: "[STUDENT COORDINATOR 2]",
-        role: "Technical Operations Lead",
-        category: "Student",
-        designation: "Pre-Final Year CSE",
-        department: "Event Management & Portal Lead",
-        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80"
-      }
-    ]
+    ] as TeamMember[],
+    students: {
+      title: "STUDENT VOLUNTEERS",
+      count: "[XX]+",
+      description: "Student volunteers who ran the event on the ground."
+    } as StudentVolunteers
   },
 
   // Event Gallery
