@@ -91,13 +91,29 @@ export const Gallery: React.FC = () => {
                 aria-label={`Open photo: ${item.title}`}
                 className={`group relative overflow-hidden rounded-2xl border border-white/10 hover:border-[#F58220]/70 text-left cursor-pointer shadow-xl hover:shadow-[0_24px_50px_-24px_rgba(245,130,32,0.55)] transition-[border-color,box-shadow] duration-500 focus-visible:outline-2 focus-visible:outline-[#F58220] ${item.aspect}`}
               >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 ease-out"
-                  style={{ objectPosition: item.imagePosition }}
-                  loading="lazy"
-                />
+                {item.video ? (
+                  /* scale-[1.3] crops the black letterbox bars baked into the source video */
+                  <video
+                    src={item.video}
+                    poster={item.image}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label={item.title}
+                    className="absolute inset-0 w-full h-full object-cover scale-[1.3] group-hover:scale-[1.35] transition-transform duration-1000 ease-out"
+                    style={{ objectPosition: item.imagePosition }}
+                  />
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 ease-out"
+                    style={{ objectPosition: item.imagePosition }}
+                    loading="lazy"
+                  />
+                )}
 
                 {/* Bottom shade: always on the big tile, otherwise fades in on hover */}
                 <div
@@ -180,16 +196,32 @@ export const Gallery: React.FC = () => {
                   {/* Image stage */}
                   <div className="relative flex-1 min-h-[16rem] bg-black/60 flex items-center justify-center p-3 sm:p-5 overflow-hidden">
                     <AnimatePresence mode="wait">
-                      <motion.img
-                        key={activeItem.id}
-                        src={activeItem.image}
-                        alt={activeItem.title}
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -40 }}
-                        transition={{ duration: 0.3, ease: EASE }}
-                        className="max-h-[62vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl"
-                      />
+                      {activeItem.video ? (
+                        <motion.video
+                          key={activeItem.id}
+                          src={activeItem.video}
+                          poster={activeItem.image}
+                          controls
+                          autoPlay
+                          playsInline
+                          initial={{ opacity: 0, x: 40 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -40 }}
+                          transition={{ duration: 0.3, ease: EASE }}
+                          className="max-h-[62vh] w-auto max-w-full rounded-2xl shadow-2xl"
+                        />
+                      ) : (
+                        <motion.img
+                          key={activeItem.id}
+                          src={activeItem.image}
+                          alt={activeItem.title}
+                          initial={{ opacity: 0, x: 40 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -40 }}
+                          transition={{ duration: 0.3, ease: EASE }}
+                          className="max-h-[62vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl"
+                        />
+                      )}
                     </AnimatePresence>
 
                     <button

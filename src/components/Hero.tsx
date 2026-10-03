@@ -1,7 +1,7 @@
 import React from 'react';
 import { EVENT_CONFIG } from '../config/eventConfig';
 import { CountUp } from './CountUp';
-import { ArrowDown, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowDown, CheckCircle2, Sparkles } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -41,14 +41,6 @@ export const Hero: React.FC = () => {
           >
             <Sparkles className="w-4 h-4 text-amber-200" />
             <span>EXPLORE HIGHLIGHTS</span>
-          </a>
-
-          <a
-            href="#projects"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm font-display font-semibold text-zinc-300 glass-panel hover:bg-white/10 hover:text-white border border-white/15 transition-all duration-300 group"
-          >
-            <span>VIEW PROJECTS</span>
-            <ChevronRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-1 transition-transform" />
           </a>
 
           <a

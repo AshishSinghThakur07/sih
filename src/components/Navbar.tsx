@@ -5,7 +5,6 @@ import { Menu, X } from 'lucide-react';
 const NAV_LINKS = [
   { name: 'Glance', href: '#glance' },
   { name: 'Journey', href: '#journey' },
-  { name: 'Projects', href: '#projects' },
   { name: 'Winners', href: '#winners' },
   { name: 'Team', href: '#team' },
   { name: 'Gallery', href: '#gallery' },

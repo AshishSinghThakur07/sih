@@ -57,6 +57,8 @@ export interface TeamMember {
   designation: string;
   /** Optional portrait, e.g. "/team/spoc.jpg" (file lives in /public/team). Falls back to initials. */
   image?: string;
+  /** CSS object-position for the round crop, e.g. "50% 20%". Defaults to centered. */
+  imagePosition?: string;
 }
 
 export interface StudentVolunteers {
@@ -70,6 +72,8 @@ export interface GalleryItem {
   title: string;
   category: string;
   image: string;
+  /** Optional video (mp4). When set, the tile plays it muted on loop and `image` is used as the poster. */
+  video?: string;
   /** CSS object-position for the tile crop, e.g. "50% 30%". */
   imagePosition?: string;
   aspect: string;
@@ -189,7 +193,7 @@ export const EVENT_CONFIG = {
       techStack: ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
       teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4"],
       image: "/projects/drone-team.jpg",
-      imagePosition: "50% 30%",
+      imagePosition: "50% 62%",
       isFeatured: true
     },
     {
@@ -225,7 +229,8 @@ export const EVENT_CONFIG = {
       description: "[Short description of the project.]",
       techStack: ["[Tech 1]", "[Tech 2]"],
       teamMembers: ["Member 1 (Lead)", "Member 2", "Member 3", "Member 4"],
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+      image: "/gallery/event-3.jpg",
+      imagePosition: "50% 25%",
       isFeatured: false
     }
   ] as ShowcaseProject[],
@@ -265,19 +270,22 @@ export const EVENT_CONFIG = {
         id: "t-1",
         name: "Ms. Aarti Jaiswal",
         role: "SIH SPOC",
-        designation: "Dean – Training & Placement"
+        designation: "Dean – Training & Placement",
+        image: "/team/aarti-jaiswal.jpg"
       },
       {
         id: "t-2",
         name: "Harendra Kr. Prajapati",
         role: "Hackathon Advisor & Event Head",
-        designation: "Event Head – Internal SIH 2026"
+        designation: "Event Head – Internal SIH 2026",
+        image: "/team/harendra-prajapati.jpg"
       },
       {
         id: "t-3",
         name: "Anurag Pandey",
         role: "HOD – Training & Placement",
-        designation: "Head of Department"
+        designation: "Head of Department",
+        image: "/team/anurag-pandey.jpg"
       }
     ] as TeamMember[],
     students: {
@@ -294,65 +302,44 @@ export const EVENT_CONFIG = {
       title: "36-Hour Innovation Build Sprint",
       category: "Coding & Prototyping",
       image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
+      video: "https://donjntlhqkfprhyqowia.supabase.co/storage/v1/object/public/SIH/main.mp4",
       aspect: "md:col-span-6 md:row-span-2",
       description: "RRGI student teams collaborating during the overnight build phase in the Innovation Block."
     },
     {
       id: "g-2",
-      title: "Hardware & Robotics Assembly",
-      category: "Hardware Track",
-      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+      title: "Hardware Project Showcase",
+      category: "Project Demo",
+      image: "/gallery/event-3.jpg",
+      imagePosition: "50% 30%",
       aspect: "md:col-span-3",
-      description: "Microcontroller wiring, sensor calibration, and prototype assembly by engineering teams."
+      description: "Teams presenting working prototypes to the judges."
     },
     {
       id: "g-3",
       title: "Jury Demonstration & Prototype Pitch",
       category: "Evaluation Round",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      image: "/gallery/event-2.jpg",
+      imagePosition: "30% 40%",
       aspect: "md:col-span-3",
       description: "Teams presenting system architecture and functioning models before external judges."
     },
     {
       id: "g-4",
-      title: "Faculty Mentorship & Guidance",
-      category: "Mentorship",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
+      title: "Technical Approach Presentation",
+      category: "Team Pitch",
+      image: "/gallery/event-1-zoom.jpg",
       aspect: "md:col-span-3",
-      description: "Senior faculty mentors conducting 1-on-1 code reviews and architecture refinements."
+      description: "Team The Rangers presenting their technical approach and proposed system architecture on stage."
     },
     {
       id: "g-5",
-      title: "Inaugural Session & Keynote Address",
-      category: "Event Ceremony",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80",
+      title: "The Core Team",
+      category: "Core Team",
+      image: "/gallery/core-team.jpg",
+      imagePosition: "50% 35%",
       aspect: "md:col-span-3",
-      description: "Opening ceremony at RRGI Auditorium marking the official launch of Internal SIH 2026."
-    },
-    {
-      id: "g-6",
-      title: "Valedictory Awards & National Nomination",
-      category: "Winners Ceremony",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-      aspect: "md:col-span-4",
-      description: "Top winning teams receiving official SIH 2026 nomination certificates and honors."
-    },
-    {
-      id: "g-7",
-      title: "First-Year Drone Simulator Team",
-      category: "Hardware Track",
-      image: "/projects/drone-team.jpg",
-      imagePosition: "50% 30%",
-      aspect: "md:col-span-4",
-      description: "The first-year team behind the drone simulator, outside the academic block."
-    },
-    {
-      id: "g-8",
-      title: "Hardware Project Showcase",
-      category: "Project Demo",
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
-      aspect: "md:col-span-4",
-      description: "Teams presenting working hardware prototypes to the judges."
+      description: "The student core team behind Internal SIH 2026."
     }
   ] as GalleryItem[],
 

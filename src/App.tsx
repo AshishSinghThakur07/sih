@@ -4,7 +4,6 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { HackathonGlance } from './components/HackathonGlance';
 import { EventJourney } from './components/EventJourney';
-import { InnovationShowcase } from './components/InnovationShowcase';
 import { Winners } from './components/Winners';
 import { OrganizingTeam } from './components/OrganizingTeam';
 import { Gallery } from './components/Gallery';
@@ -34,9 +33,6 @@ export function App() {
 
         {/* 05 — EVENT JOURNEY */}
         <EventJourney />
-
-        {/* 06 — BEST PROJECTS */}
-        <InnovationShowcase />
 
         {/* 07 — WINNERS & RECOGNITION */}
         <Winners />
